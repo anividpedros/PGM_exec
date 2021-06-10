@@ -1,0 +1,6 @@
+bin/
+obj/
+.vscode/
+*.log
+GravityFile.txt
+Files/
