@@ -2,17 +2,17 @@
 
 ## Setup
 
-1. Create folder `Files/` and add `.obj` of choice       
-2. Create `GravityFile.txt` using `make`
-3. Create mex 
+1. Add `.obj` file of choice in `Files/`      
+2. Create `GravityFile.txt`
+3. Create MEX executable
 4. Run in MATLAB
 
-## Generate GravityFile.txt
+## Generate `GravityFile.txt`
 ```
   make CreateGravFile
 ```
 
-## Generate mex
+## Generate MEX
 ```
   make mexPolyGrav
 ```
