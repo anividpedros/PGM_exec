@@ -14,15 +14,15 @@ int main()
 {  
 
     std::ifstream GravityFile("GravityFile.txt");
-    Polygon polygon(GravityFile);
+    Polygon* polygonPtr = new Polygon(GravityFile);
     
     Vect Xsc(3);
     Xsc [0] = 0.0280;
     Xsc [1] = 0;
-    Xsc [2] = 0.2631;    
+    Xsc [2] = 0.2631;  
 
     Vect gravity(3);
-    gravity = PolyGrav(Xsc, polygon);
+    gravity = PolyGrav(Xsc, *polygonPtr);
 
     disp(gravity);
     

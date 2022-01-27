@@ -268,7 +268,11 @@ void Polygon::CreateGravFile(std::string filename, double density)
   delete edgeFacet;
   
   // Create Gravity File
-  std::ofstream GravityFile("GravityFile.txt");
+  // std::ofstream GravityFile("GravityFile.txt");
+  string string1( "/Users/anivid/Documents/Research/HybridShapeModel/Code/GravityFiles/Bennu_q16_q18/");
+
+  std::ofstream GravityFile("/Users/anivid/Documents/Research/HybridShapeModel/Code/GravityFiles/Bennu_q16_q18/");
+  
   GravityFile << mGs << std::endl;
   GravityFile << mNOV << std::endl;
   GravityFile << mNOF << std::endl;
@@ -355,19 +359,29 @@ void Polygon::ReadPolygon(std::string filename)
 int main()
 {  
 
-    // std::string filename = "Files/Bennu50k.obj";
-    std::string filename;
-    std::cout<<"Write File Path for obj file:"<<std::endl;
-    std::cin>>filename;
+  std::ifstream ShapeModelFile("/Files/Bennu_q16_q128_hybrids.txt");
 
-    // double density = 1.26e12; //kg/km3
-    double density;
-    std::cout<<"Density value:"<<std::endl;
-    std::cin>>density;
+  assert(ShapeModelFile.is_open());
+  std::string filename=" ";
+    for(int i = 0; i < 18; i++)
+    {
+      ShapeModelFile >> filename
+    
 
-    Polygon p;
-    p.CreateGravFile(filename,density);
+      // std::string filename = "/Users/anivid/Documents/Research/HybridShapeModel/Code/BaselineShapes/Bennu_128.obj";
+      // std::string filename;
+      // std::cout<<"Write File Path for obj file:"<<std::endl;
+      // std::cin>>filename;
 
-    return 0;
+      double density = 1.26e12; //kg/km3
+      // double density;
+      // std::cout<<"Density value:"<<std::endl;
+      // std::cin>>density;
+
+      Polygon p;
+      p.CreateGravFile(filename,density);
+  } 
+
+  return 0;
 
 }
