@@ -11,6 +11,7 @@
 ```
   make CreateGravFile
 ```
+* Add path as: Files/name.obj and provide density value
 
 ## Generate MEX
 ```

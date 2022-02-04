@@ -37,7 +37,6 @@ Polygon::Polygon(std::ifstream& GravityFile)
   mY = new double [mNOV];
   mZ = new double [mNOV];
 
-  #pragma omp parallel for
   for(int i = 0; i < mNOV; i++)
     {
       GravityFile >> mX[i] >> mY[i] >> mZ[i];   
@@ -48,7 +47,6 @@ Polygon::Polygon(std::ifstream& GravityFile)
   mListN = new double* [mNOF];
   mF = new double* [mNOF];
 
-  #pragma omp parallel for
   for(int i = 0; i < mNOF; i++)
     {
       mListTri[i] = new int [3];
@@ -65,7 +63,6 @@ Polygon::Polygon(std::ifstream& GravityFile)
   
   mE = new double* [mNOE];
 
-  #pragma omp parallel for
   for(int i = 0; i < mNOE; i++)
     {
       mListE[i] = new int [2];
@@ -85,7 +82,6 @@ Polygon::~Polygon()
   delete[] mY;
   delete[] mZ;
 
-  #pragma omp parallel for
   for(int i = 0; i < mNOF; i++)
     {
       delete[] mListTri[i];
@@ -97,7 +93,6 @@ Polygon::~Polygon()
   delete[] mListN;
   delete[] mF;
 
-  #pragma omp parallel for
   for(int i = 0; i < mNOE; i++)
     {
       delete[] mListE[i];
@@ -140,7 +135,6 @@ Vect Polygon::GetX() const
 {
   Vect x(mNOV);
   
-  #pragma omp parallel for
   for(int i = 0; i < mNOV; i++)
     {
       x[i] = mX[i];
@@ -154,7 +148,6 @@ Vect Polygon::GetY() const
 {
   Vect y(mNOV);
   
-  #pragma omp parallel for
   for(int i = 0; i < mNOV; i++)
     {
       y[i] = mY[i];
@@ -168,7 +161,6 @@ Vect Polygon::GetZ() const
 {
   Vect z(mNOV);
   
-  #pragma omp parallel for
   for(int i = 0; i < mNOV; i++)
     {
       z[i] = mZ[i];
@@ -183,7 +175,6 @@ Vect Polygon::GetListTri() const
 
 	Vect ListTri(mNOF*3);
 
-  #pragma omp parallel for
 	for(int i = 0; i < mNOF; i++)
 	{
 		for(int j = 0; j < 3; j++)
@@ -201,7 +192,6 @@ Vect Polygon::GetListN() const
 
 	Vect ListN(mNOF*3);
 
-  #pragma omp parallel for
 	for(int i = 0; i < mNOF; i++)
 	{
 		for(int j = 0; j < 3; j++)
@@ -236,7 +226,6 @@ Vect Polygon::GetListE() const
 
 	Vect ListE(mNOE*2);
 
-  #pragma omp parallel for
 	for(int i = 0; i < mNOE; i++)
 	{
 		for(int j = 0; j < 2; j++)
@@ -254,7 +243,6 @@ Vect Polygon::GetE() const
 
 	Vect E(mNOE*9);
 
-  #pragma omp parallel for
 	for(int i = 0; i < mNOE; i++)
 	{
 		for(int j = 0; j < 9; j++)
@@ -282,7 +270,6 @@ Vect PolyGrav(Vect& Xsc, Polygon& Body)
   double wf;
 
   //Sum over Polyhedron Facets
-  #pragma omp parallel for
   for(int i = 0; i < Body.mNOF; i++)
     {
       // Vertex no. 1
@@ -339,7 +326,6 @@ Vect PolyGrav(Vect& Xsc, Polygon& Body)
   double Re, Le;
   Matrix E(3,3);
 
-  #pragma omp parallel for
   for(int i = 0; i < Body.mNOE; i++)
     {
      

@@ -115,6 +115,7 @@ void Polygon::CreateGravFile(std::string filename, double density)
   bool repeated = 0; //set to false by default
   int numEdges = 0; // total number of non-repeated edges
   std::vector<int> index; // indices for non-repeated edges
+
   for (int nn = 0; nn < 3*mNOF; nn++) {
       repeated = 0;
       for (int mm = 0; mm < nn; mm++) {
@@ -234,6 +235,7 @@ void Polygon::CreateGravFile(std::string filename, double density)
 
       // Edge Dyads
       mE[jj] = new double [9];
+
       for (int i = 0; i < 3; i++)
       {
         nhatA[i] = mListN[edgeFacet[jj][0]][i];
@@ -268,10 +270,7 @@ void Polygon::CreateGravFile(std::string filename, double density)
   delete edgeFacet;
   
   // Create Gravity File
-  // std::ofstream GravityFile("GravityFile.txt");
-  string string1( "/Users/anivid/Documents/Research/HybridShapeModel/Code/GravityFiles/Bennu_q16_q18/");
-
-  std::ofstream GravityFile("/Users/anivid/Documents/Research/HybridShapeModel/Code/GravityFiles/Bennu_q16_q18/");
+  std::ofstream GravityFile("GravityFile.txt");
   
   GravityFile << mGs << std::endl;
   GravityFile << mNOV << std::endl;
@@ -358,29 +357,22 @@ void Polygon::ReadPolygon(std::string filename)
 
 int main()
 {  
+      // std::string filename = 'Files/Bennu50k.obj';
+      std::string filename;
+      std::cout<<"Write File Path for obj file:"<<std::endl;
+      std::cin>>filename;
 
-  std::ifstream ShapeModelFile("/Files/Bennu_q16_q128_hybrids.txt");
+      // double density = 1.26e12; //kg/km3
+      double density;
+      std::cout<<"Density value:"<<std::endl;
+      std::cin>>density;
 
-  assert(ShapeModelFile.is_open());
-  std::string filename=" ";
-    for(int i = 0; i < 18; i++)
-    {
-      ShapeModelFile >> filename
-    
-
-      // std::string filename = "/Users/anivid/Documents/Research/HybridShapeModel/Code/BaselineShapes/Bennu_128.obj";
-      // std::string filename;
-      // std::cout<<"Write File Path for obj file:"<<std::endl;
-      // std::cin>>filename;
-
-      double density = 1.26e12; //kg/km3
-      // double density;
-      // std::cout<<"Density value:"<<std::endl;
-      // std::cin>>density;
+      std::cout<<"Creating Gravity File"<<std::endl;
 
       Polygon p;
       p.CreateGravFile(filename,density);
-  } 
+
+      std::cout<<"Done Creating Gravity File"<<std::endl;
 
   return 0;
 
